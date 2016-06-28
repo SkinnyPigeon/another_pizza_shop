@@ -1,0 +1,21 @@
+<h1>What do you want?</h1>
+
+<form action="/pizza" method="post">
+  <label for="first_name">First Name: </label>
+  <input type="text" name="first_name">
+  <label for="last_name">Last Name: </label>
+  <input type="text" name="last_name">
+
+  <label for="topping">What do you want from me?</label>
+  <select name="topping">
+    <option value="Nothiing But Crust">Nothing But Crust</option>
+    <option value="Empty Boxes">Empty Boxes</option>
+    <option value="Cats Cats Cats">Cats Cats Cats</option>
+    <option value="Lonely Man Calzone">Lonely Man Calzone</option>
+  </select>
+
+  <label for='quantity'>Quantity: </label>
+  <input type="number" name="quantity">
+
+  <input type="submit" value="Order Pizza">
+</form>
