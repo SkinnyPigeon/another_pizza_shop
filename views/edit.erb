@@ -1,0 +1,21 @@
+<h1>Jesus we've already started making it. What do you want now?</h1>
+
+<form action="/pizza/<%=@pizza.id%>" method="post">
+  <label for="first_name">First Name: </label>
+  <input type="text" name="first_name" value="<%= @pizza.first_name%>">
+  <label for="last_name">Last Name: </label>
+  <input type="text" name="last_name" value="<%= @pizza.last_name%>">
+
+  <label for="topping">What do you want from me?</label>
+  <select name="topping">
+    <option value="Nothing But Crust" <%= "selected= 'selected'" if @pizza.topping == "Nothing But Crust" %>>Nothing But Crust</option>
+    <option value="Empty Boxes" <%= "selected= 'selected'" if @pizza.topping == "Empty Boxes" %>>Empty Boxes</option>
+    <option value="Cats Cats Cats" <%= "selected= 'selected'" if @pizza.topping == "Cats Cats Cats" %>>Cats Cats Cats</option>
+    <option value="Lonely Man Calzone" <%= "selected= 'selected'" if @pizza.topping == "Lonely Man Calzone" %>>Lonely Man Calzone</option>
+  </select>
+
+  <label for='quantity'>Quantity: </label>
+  <input type="number" name="quantity" value="<%= @pizza.quantity%>">
+
+  <input type="submit" value="Update">
+</form>

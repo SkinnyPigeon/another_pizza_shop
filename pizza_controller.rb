@@ -17,3 +17,35 @@ get '/pizza' do
   @pizzas = Pizza.all()
   erb( :index )
 end
+
+get '/pizza/:id' do
+  #find pizza with specific id
+  @pizza = Pizza.find( params[:id] )
+  erb( :show )
+end
+
+get '/pizza/:id/edit' do
+  @pizza = Pizza.find( params[:id] )
+  erb( :edit )
+end
+
+post '/pizza/:id' do
+  @pizza = Pizza.update( params )
+  redirect to( "/pizza/#{ params[:id] }")
+end
+
+
+post '/pizza/:id/delete' do
+  Pizza.destroy( params[:id] )
+  redirect to ( '/pizza')
+end
+
+
+
+
+
+
+
+
+
+

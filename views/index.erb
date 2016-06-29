@@ -5,5 +5,7 @@
   <p><%= pizza.pretty_name() %></p>
   <b>Order: </b>
   <p><%= pizza.quantity %> x <%= pizza.topping %> </p>
-  <br>
+  <a href="/pizza/<%= pizza.id%>">View</a>
+  <a href="/pizza/<%= pizza.id%>/edit">Edit</a>
+  <hr>
 <% end %>

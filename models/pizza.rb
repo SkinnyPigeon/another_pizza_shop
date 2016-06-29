@@ -1,4 +1,5 @@
-require('pg')
+require_relative('../db/sql_runner')
+require('pry-byebug')
 
 class Pizza
 
@@ -12,18 +13,38 @@ class Pizza
     @id = options['id'].to_i
   end
 
+  def self.find( id )
+    sql = "SELECT * FROM pizzas WHERE id = #{id}"
+    pizza = run_sql( sql )
+    result = Pizza.new( pizza.first )
+
+    return result
+  end
+
+  def self.update( options )
+    sql = "UPDATE pizzas SET 
+          first_name='#{ options[ 'first_name' ]}',
+          last_name='#{ options[ 'last_name' ]}',
+          topping='#{ options[ 'topping' ]}',
+          quantity='#{ options[ 'quantity' ]}'  
+          WHERE id='#{ options[ 'id' ]}'  "
+    run_sql( sql )
+  end
+
+  def self.destroy( id )
+    sql = "DELETE FROM pizzas WHERE id=#{id}"
+    run_sql( sql )
+  end
+
   def self.all()
-    db = PG.connect( {dbname: 'pizza_shop', host: 'localhost'} )
     sql = "SELECT * FROM pizzas"
-    pizzas = db.exec( sql )
+    pizzas = run_sql( sql )
 
     result = pizzas.map { |pizza| Pizza.new( pizza ) }
-    db.close()
     return result
   end
 
   def save()
-    db = PG.connect( {dbname: 'pizza_shop', host: 'localhost'} )
     sql = "INSERT INTO pizzas ( 
     first_name, 
     last_name,
@@ -35,8 +56,7 @@ class Pizza
     '#{@topping}', 
     #{quantity} 
     ) RETURNING *" 
-    pizza_data = db.exec( sql )
-    db.close
+    pizza_data = run_sql( sql )
     @id = pizza_data.first()['id'].to_i
   end
 
